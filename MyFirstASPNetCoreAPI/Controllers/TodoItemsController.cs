@@ -11,7 +11,6 @@ using MyFirstASPNetCoreAPI.Models.DTO;
 namespace MyFirstASPNetCoreAPI.Controllers
 {
     [Route("api/TodoItem")]
-    [Route("api/[controller]")]
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
