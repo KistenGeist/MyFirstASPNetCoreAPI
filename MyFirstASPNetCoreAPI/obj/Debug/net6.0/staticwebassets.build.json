@@ -1,11 +1,71 @@
 {
   "Version": 1,
-  "Hash": "F+pCNdgRgM2Ba5n4ct4z9LTRvzThMpVYHEXxhx/ZTCU=",
+  "Hash": "lKmkmv5kWd7xv3q2IHfsaav/jRt8iAHmLm58QQkxVdM=",
   "Source": "MyFirstASPNetCoreAPI",
   "BasePath": "_content/MyFirstASPNetCoreAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "MyFirstASPNetCoreAPI\\wwwroot",
+      "Source": "MyFirstASPNetCoreAPI",
+      "ContentRoot": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\",
+      "BasePath": "_content/MyFirstASPNetCoreAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\css\\site.css",
+      "SourceId": "MyFirstASPNetCoreAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\",
+      "BasePath": "_content/MyFirstASPNetCoreAPI",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\index.html",
+      "SourceId": "MyFirstASPNetCoreAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\",
+      "BasePath": "_content/MyFirstASPNetCoreAPI",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\js\\site.js",
+      "SourceId": "MyFirstASPNetCoreAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\wkusnezow\\Documents\\GitHub\\MyFirstASPNetCoreAPI\\MyFirstASPNetCoreAPI\\wwwroot\\",
+      "BasePath": "_content/MyFirstASPNetCoreAPI",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ]
 }
