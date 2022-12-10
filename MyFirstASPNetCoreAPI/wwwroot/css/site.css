@@ -21,3 +21,17 @@ td {
     border: 1px solid;
     padding: 5px;
 }
+
+#editPetForm {
+    display: none;
+}
+
+#wrapper{
+    overflow: hidden
+}
+
+#divElement {
+    float: left;
+    border: 1px;
+    margin: 10px;
+}
