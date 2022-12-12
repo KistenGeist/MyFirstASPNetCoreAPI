@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[6.0.10, )"
             },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.31, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

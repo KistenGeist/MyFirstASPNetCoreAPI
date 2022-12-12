@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyFirstASPNetCoreAPI.DatabaseAccess;
 using MyFirstASPNetCoreAPI.Models;
 using MyFirstASPNetCoreAPI.Models.DTO;
 
@@ -27,10 +28,10 @@ namespace MyFirstASPNetCoreAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PetDTO>>> GetPets()
         {
-            //return await _context.Pets.ToListAsync();
-            return await _context.Pets
-                .Select(x => PetToDTO(x))
-                .ToListAsync();
+            //get pets from Database
+            List<Pet> lstPets = await Task.Run( () => PetsDA.GetPets());
+
+            return lstPets.Select(x => PetToDTO(x)).ToList();
         }
 
         // GET: api/Pets/5
