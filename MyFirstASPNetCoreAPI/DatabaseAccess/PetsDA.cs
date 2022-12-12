@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Data.SqlClient;
-using MyFirstASPNetCoreAPI.Models;
+﻿using MyFirstASPNetCoreAPI.Models;
 using MySql.Data.MySqlClient;
 
 namespace MyFirstASPNetCoreAPI.DatabaseAccess

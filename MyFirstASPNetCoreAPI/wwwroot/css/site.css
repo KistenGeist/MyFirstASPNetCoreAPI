@@ -35,3 +35,34 @@ td {
     border: 1px;
     margin: 10px;
 }
+
+.petsContainer {
+    float: left;
+    margin: 10px;
+    border: 1px;
+    border-color: black;
+}
+
+.pet {
+    float: left;
+    margin: 10px;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    list-style-type: none;
+}
+.petImage{
+    height: 100px;
+    width: 100px;
+
+}
+
+.lstItemContainer {
+    float: left;
+    border: 1px;
+    margin: 10px;
+}
+
+li.nostyle {
+    
+}

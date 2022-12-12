@@ -83,6 +83,22 @@
                 <tbody id="pets"></tbody>
             </table>
         </div>
+
+
+        <div>
+            <h1>TODO</h1>
+            <ol ng-if="pets.length > 0">
+                <li ng-repeat="pet in pets">
+                    <div class="pet">
+                        <img class="petImage lstItemContainer" id="petimage-{{$index}}" src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" />
+                        <div class="lstItemContainer">
+                            <label id="petName" ng-bind="::pet.name">Name: </label>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
     </div>
 
     <script src="js/site.js" asp-append-version="true"></script>

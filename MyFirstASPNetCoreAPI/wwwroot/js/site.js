@@ -273,7 +273,7 @@ function _displayPets(data) {
     _displayPetCount(data.length);
 
     const button = document.createElement('button');
-
+    
     data.forEach(pet => {
         let geimpftCheckbox = document.createElement('input');
         geimpftCheckbox.type = 'checkbox';
@@ -321,4 +321,5 @@ function _displayPets(data) {
     });
 
     pets = data;
+    console.log(pets);
 }
