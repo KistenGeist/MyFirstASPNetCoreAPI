@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using MyFirstASPNetCoreAPI.DatabaseAccess;
 using MyFirstASPNetCoreAPI.Models;
 using MyFirstASPNetCoreAPI.Models.DTO;
+using Newtonsoft.Json;
 
 namespace MyFirstASPNetCoreAPI.Controllers
 {
@@ -17,13 +18,6 @@ namespace MyFirstASPNetCoreAPI.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
-        private readonly PetContext _context;
-
-        public PetsController(PetContext context)
-        {
-            _context = context;
-        }
-
         // GET: api/Pets
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PetDTO>>> GetPets()
@@ -38,9 +32,10 @@ namespace MyFirstASPNetCoreAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PetDTO>> GetPet(int id)
         {
-            var pet = await _context.Pets.FindAsync(id);
+            var pet = await Task.Run(() => GetPetById(id));
+            //var pet = await _context.Pets.FindAsync(id);
 
-            if (pet == null)
+            if (pet == null || pet.Id == 0)
             {
                 return NotFound();
             }
@@ -51,7 +46,7 @@ namespace MyFirstASPNetCoreAPI.Controllers
         // PUT: api/Pets/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPet(int id, PetDTO petDto)
+        public async Task<ActionResult<string>> PutPet(int id, PetDTO petDto)
         {
             if (id != petDto.Id)
             {
@@ -59,8 +54,8 @@ namespace MyFirstASPNetCoreAPI.Controllers
             }
 
             //check if pet exists
-            var pet = await _context.Pets.FindAsync(id);
-            if (pet == null)
+            Pet pet = await Task.Run( () => GetPetById(id));
+            if (pet == null || pet.Id == 0)
             {
                 return NotFound();
             }
@@ -73,15 +68,13 @@ namespace MyFirstASPNetCoreAPI.Controllers
             pet.Geimpft = petDto.Geimpft;
             pet.Geschlecht = petDto.Geschlecht;
 
-            _context.Entry(pet).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                return await Task.Run(() => PetsDA.UpdatePet(pet));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException dbuce)
             {
-                return NoContent();
+                return dbuce.InnerException.ToString();
             }
 
             return NoContent();
@@ -90,7 +83,7 @@ namespace MyFirstASPNetCoreAPI.Controllers
         // POST: api/Pets
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PetDTO>> PostPet(PetDTO petDto)
+        public async Task<ActionResult<string>> PostPet(PetDTO petDto)
         {
             var pet = new Pet
             {
@@ -102,35 +95,39 @@ namespace MyFirstASPNetCoreAPI.Controllers
                 Geschlecht = petDto.Geschlecht,
             };
 
-            _context.Pets.Add(pet);
-            await _context.SaveChangesAsync();
-
-            //return CreatedAtAction("GetPet", new { id = pet.Id }, pet);
-            return CreatedAtAction(
-                nameof(GetPet),
-                new { Id = pet.Id },
-                PetToDTO(pet));
-        }
-
-        // DELETE: api/Pets/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePet(int id)
-        {
-            var pet = await _context.Pets.FindAsync(id);
-            if (pet == null)
+            try
             {
-                return NotFound();
+                return await Task.Run(() => PetsDA.InsertPet(pet));
             }
-
-            _context.Pets.Remove(pet);
-            await _context.SaveChangesAsync();
+            catch (DbUpdateConcurrencyException dbuce)
+            {
+                return dbuce.InnerException.ToString();
+            }
 
             return NoContent();
         }
 
-        private bool PetExists(int id)
+        // DELETE: api/Pets/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<string>> DeletePet(int id)
         {
-            return _context.Pets.Any(e => e.Id == id);
+            //check if pet exists
+            Pet pet = await Task.Run(() => GetPetById(id));
+            if (pet == null || pet.Id == 0)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                return await Task.Run(() => PetsDA.DeletePet(id));
+            }
+            catch (DbUpdateConcurrencyException dbuce)
+            {
+                return dbuce.InnerException.ToString();
+            }
+
+            return NoContent();
         }
 
         /// <summary>
@@ -148,6 +145,11 @@ namespace MyFirstASPNetCoreAPI.Controllers
                                 pet.Geimpft,
                                 pet.Geschlecht
                               );
+        }
+
+        private Pet GetPetById(int id)
+        {
+            return PetsDA.GetPetById(id);
         }
     }
 }

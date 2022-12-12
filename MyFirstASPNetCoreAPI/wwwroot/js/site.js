@@ -141,8 +141,6 @@ function addPet() {
     const addGeimpftCheckbox = document.getElementById('add-Geimpft');
     const addGeschlechtCheckbox = document.getElementById('add-Geschlecht');
 
-    
-
     const pet = {
         name: addNameTextbox.value.trim(),
         Alter: addAlterTextbox.value.trim(),
@@ -162,24 +160,45 @@ function addPet() {
         body: JSON.stringify(pet)
     })
         .then(response => response.json())
-        .then(() => {
-            getPets();
+        .then(data => {
+            if (data !== "") {
+                console.log("Error");
+                console.log(data);
+            }
+            else {
+                console.log("After Insert: getPets()");
+                getPets();
 
-            addNameTextbox.value = '';
-            addAlterTextbox.value = '';
-            addArtTextbox.value = '';
-            addRasseTextbox.value = '';
-            addGeimpftCheckbox.value = '';
-            addGeschlechtCheckbox.value = false;
+                addNameTextbox.value = '';
+                addAlterTextbox.value = '';
+                addArtTextbox.value = '';
+                addRasseTextbox.value = '';
+                addGeimpftCheckbox.value = false;
+                addGeschlechtCheckbox.value = '';
+            }
         })
         .catch(error => console.error('Unable to add pet.', error));
 }
 
 function deletePet(id) {
     fetch(`${uriPets}/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
     })
-        .then(() => getPets())
+        .then(response => response.json())
+        .then(data => {
+            if (data !== "") {
+                console.log("Error");
+                console.log(data);
+            }
+            else {
+                console.log("After Delete: getPets()");
+                getPets();
+            }
+        })
         .catch(error => console.error('Unable to delete pet.', error));
 }
 
@@ -219,7 +238,17 @@ function updatePet() {
         },
         body: JSON.stringify(pet)
     })
-        .then(() => getPets())
+        .then(response => response.json())
+        .then(data => {
+            if (data !== "") {
+                console.log("Error");
+                console.log(data);
+            }
+            else {
+                console.log("After Update: getPets()");
+                getPets();
+            }
+        })
         .catch(error => console.error('Unable to update pet.', error));
 
     closePetInput();
@@ -249,7 +278,7 @@ function _displayPets(data) {
         let geimpftCheckbox = document.createElement('input');
         geimpftCheckbox.type = 'checkbox';
         geimpftCheckbox.disabled = true;
-        geimpftCheckbox.checked = pet.Geimpft;
+        geimpftCheckbox.checked = pet.geimpft;
 
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
